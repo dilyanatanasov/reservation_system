@@ -1,0 +1,33 @@
+CREATE DATABASE IF NOT EXISTS `hutreservationsystem` CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
+
+
+CREATE TABLE IF NOT EXISTS `hutreservationsystem`.`huts`(
+    `id_hut` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `address` VARCHAR(255) NOT NULL,
+    `rooms` SMALLINT NOT NULL,
+    `extras` TEXT NOT NULL,
+    `price` DECIMAL(15,2) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `hutreservationsystem`.`reservations`(
+    `id_reservation` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `first_name` VARCHAR(50) NOT NULL,
+    `last_name` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `phone` VARCHAR(25) NOT NULL,
+    `from_date` DATE NOT NULL,
+    `to_date` DATE NOT NULL,
+    `pay_day` DATE NOT NULL,
+    `hut_id` INT NOT NULL,
+    `full_price` DECIMAL(15,2) NOT NULL,
+    FOREIGN KEY (`hut_id`) REFERENCES `huts`(`id_hut`)
+);
+
+INSERT INTO `hutreservationsystem`.`huts` (`name`, `address`, `rooms`, `extras`, `price`) 
+VALUES ('Borovec', 'gr.Gabrovo', '10', 'AC, Sauna, Karaoke', '25.50'),
+('Rai', 'footstool of peak Botev', '12', 'AC, Sauna, Restaurant', '32.40'),
+('Bezbog', 'Karandila', '25', 'AC, Sauna, Fitness', '15.90'),
+('Rilski Ezera', 'footstool of Rila Mountain', '17', 'AC, Sauna, Fitness, Restaurant', '65.00');
+
+
